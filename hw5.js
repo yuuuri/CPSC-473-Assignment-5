@@ -4,7 +4,6 @@
 //
 // CPSC473 Assignment 5 - build the server-side of a web application to play
 //                        Rock, Paper, Scissors, Lizard, Spock
-
 "user strict";
 
 var http = require("http"),
@@ -17,7 +16,8 @@ var http = require("http"),
 function randomChoice() {
     var choice = ["rock", "paper", "scissors", "lizard", "spock"],
         random = Math.floor(Math.random() * 5);
-    return choice[random];
+    //return choice[random];
+    return "paper";
 }
 
 
@@ -28,18 +28,24 @@ function result(playerChoice, req, res) {
     if(playerChoice === "rock") {
         if (serverChoice === "paper") {
             losses++;
+            // this msg will be displayed 
             res.write("{\"coutcome\": \"loss\", \"wins\": \"" + wins + "\", \"losses\": \"" + losses + "\", \"ties\": \"" + ties + "\"}");
         } 
     }
 
 }
 
+/* 
+    from other terminal, client sends request
+    curl --silent --request POST http://localhost:3000/play/rock | python -m json.tool
+    server gets post from client with url, call function result 
+ 
+ * */
 function getPost(req, res){
-    //res.write('{"test": "test_right"}');
-    console.log(req.url);
+    //console.log(req.url);
     if(req.method === "POST" && req.url === "/play/rock"){
-        console.log("client chose rock");
-        res.write('{"choice": "rock"}');
+        console.log("server receives user post : " + req.url);
+        //res.write('{"choice": "rock"}');
         result("rock", req, res);
     }
 
@@ -51,7 +57,7 @@ function getPost(req, res){
 server = http.createServer(function (req, res) {
     res.writeHead(200, {"Content-Type": "application/json"});
     getPost(req, res);
-    res.end("Hello World!");
+    res.end();
 });
 
 server.listen(3000);

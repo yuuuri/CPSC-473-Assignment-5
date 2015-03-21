@@ -34,21 +34,19 @@ function result(playerChoice, req, res) {
     console.log("PLAYER CHOICE: " + playerChoice);
     console.log("SERVER CHOICE: " + serverChoice);
     if (playerChoice === "rock") {
-        if ((serverChoice === "scissors") || (serverChoice === "lizard")) {
+        if ((serverChoice === "scissors") || (serverChoice === "lizard")) { //player wins
             wins++;
-            // status updata
             res.write("{\"coutcome\": \"win\", \"wins\": \"" + wins + "\", \"losses\": \"" + losses + "\", \"ties\": \"" + ties + "\"}");
-        } else if (serverChoice === "rock") {
+        } else if (serverChoice === "rock") { //player ties with server
             ties++;
             res.write("{\"coutcome\": \"tie\", \"wins\": \"" + wins + "\", \"losses\": \"" + losses + "\", \"ties\": \"" + ties + "\"}");
-        } else {
+        } else { //otherwise player loses
             losses++;
             res.write("{\"coutcome\": \"lose\", \"wins\": \"" + wins + "\", \"losses\": \"" + losses + "\", \"ties\": \"" + ties + "\"}");
         }
     }else if (playerChoice === "paper") {
          if ((serverChoice === "rock") || (serverChoice === "spock")) {
             wins++;
-            // status updata
             res.write("{\"coutcome\": \"win\", \"wins\": \"" + wins + "\", \"losses\": \"" + losses + "\", \"ties\": \"" + ties + "\"}");
         } else if (serverChoice === "paper") {
             ties++;
@@ -60,7 +58,6 @@ function result(playerChoice, req, res) {
     }else if (playerChoice === "scissors") {
          if ((serverChoice === "lizard") || (serverChoice === "paper")) {
             wins++;
-            // status updata
             res.write("{\"coutcome\": \"win\", \"wins\": \"" + wins + "\", \"losses\": \"" + losses + "\", \"ties\": \"" + ties + "\"}");
         } else if (serverChoice === "scissors") {
             ties++;
@@ -72,7 +69,6 @@ function result(playerChoice, req, res) {
     }else if (playerChoice === "lizard") {
          if ((serverChoice === "spock") || (serverChoice === "paper")) {
             wins++;
-            // status updata
             res.write("{\"coutcome\": \"win\", \"wins\": \"" + wins + "\", \"losses\": \"" + losses + "\", \"ties\": \"" + ties + "\"}");
         } else if (serverChoice === "lizard") {
             ties++;
@@ -84,7 +80,6 @@ function result(playerChoice, req, res) {
     }else if (playerChoice === "spock") {
          if ((serverChoice === "scissors") || (serverChoice === "rock")) {
             wins++;
-            // status updata
             res.write("{\"coutcome\": \"win\", \"wins\": \"" + wins + "\", \"losses\": \"" + losses + "\", \"ties\": \"" + ties + "\"}");
         } else if (serverChoice === "spock") {
             ties++;
